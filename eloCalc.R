@@ -1,3 +1,7 @@
+weeklyFrame = read.csv('./weekly_elo.csv', row.names = 1)
+
+print(row.names(weeklyFrame))
+
 elo_calc <- function(helo, hpts, aelo, apts, k = 60) {
   share_h = 10^(helo/400)
   share_a = 10^(aelo/400)
@@ -21,10 +25,10 @@ elo_gen <- function(weekFrame, prevWeek) {
   return(blanks)
 }
 
-week8mat = cbind(c(1, 2, 7, 3, 9, 5)
-                 , c(5, 5, 4, 1, 8, 1)
-                 , c(4, 6, 8, 10, 11, 12)
-                 , c(4, 4, 5, 8, 1, 7))
+week10mat = cbind(c(1, 7, 8, 3, 4, 9)
+                  , c(7, 2, 3, 5, 6, 4)
+                  , c(2, 12, 11, 6, 5, 10)
+                  , c(2, 7, 6, 3, 2, 5))
 
-weeklyFrame$week8 <- week8 <- elo_gen(week8mat, week7)
+weeklyFrame$week10 <- week10 <- elo_gen(week10mat, weeklyFrame$week9)
 write.csv(weeklyFrame, 'weekly_elo.csv')
